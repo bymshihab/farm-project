@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="CompanyLogo\" />
+    <Folder Include="EmployeeImage\" />
   </ItemGroup>
 
 </Project>

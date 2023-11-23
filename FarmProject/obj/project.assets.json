@@ -902,11 +902,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\farmManagementWithAPI\\Backend\\FarmProject\\FarmProject\\FarmProject.csproj",
+      "projectUniqueName": "C:\\Users\\a.latif\\Desktop\\FarmProject-BackEnd\\farm-project\\FarmProject\\FarmProject.csproj",
       "projectName": "FarmProject",
-      "projectPath": "F:\\farmManagementWithAPI\\Backend\\FarmProject\\FarmProject\\FarmProject.csproj",
+      "projectPath": "C:\\Users\\a.latif\\Desktop\\FarmProject-BackEnd\\farm-project\\FarmProject\\FarmProject.csproj",
       "packagesPath": "C:\\Users\\a.latif\\.nuget\\packages\\",
-      "outputPath": "F:\\farmManagementWithAPI\\Backend\\FarmProject\\FarmProject\\obj\\",
+      "outputPath": "C:\\Users\\a.latif\\Desktop\\FarmProject-BackEnd\\farm-project\\FarmProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

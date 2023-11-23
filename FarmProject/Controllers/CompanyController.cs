@@ -55,7 +55,6 @@ namespace FarmProject.Controllers
 
                     SqlCommand cmd = new SqlCommand(insertQuery, connection);
 
-                    // Add parameters
                     cmd.Parameters.AddWithValue("@CompanyId", company.CompanyId);
                     cmd.Parameters.AddWithValue("@CompanyName", company.CompanyName);
                     cmd.Parameters.AddWithValue("@VATRegNo", company.VATRegNo != null ? company.VATRegNo : DBNull.Value);
@@ -65,7 +64,6 @@ namespace FarmProject.Controllers
                     cmd.Parameters.AddWithValue("@PhoneNo", company.PhoneNo ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@Email", company.Email ?? (object)DBNull.Value);
 
-                    // Handle DBNull for imageFileName
                     object logoValue = (object)imageFileName ?? DBNull.Value;
                     cmd.Parameters.AddWithValue("@Logo", logoValue);
 
@@ -115,10 +113,9 @@ namespace FarmProject.Controllers
                     string existingLogo = null;
                     if (company.ImageFile != null)
                     {
-                        // Generate a unique file name for the uploaded image
+ 
                       string  imageFileName = $"{Path.GetFileNameWithoutExtension(company.ImageFile.FileName)}{Path.GetExtension(company.ImageFile.FileName)}";
 
-                        // Save the image file to the root path
                         string imagePath = Path.Combine("CompanyLogo", imageFileName);
 
                         using (var fileStream = new FileStream(imagePath, FileMode.Create))
