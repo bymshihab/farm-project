@@ -36,7 +36,7 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Products (ProductName, ProductDescription, Status, Price, CategoryId, UomId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@ProductName, @ProductDescription, @Status, @Price, @CategoryId, @UomId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Products (ProductName, ProductDescription, Status, Price, CategoryId, UomId,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@ProductName, @ProductDescription, @Status, @Price, @CategoryId, @UomId,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@ProductName", product.ProductName);
                             insertCmd.Parameters.AddWithValue("@ProductDescription", product.ProductDescription ?? (object)DBNull.Value);
@@ -44,6 +44,7 @@ namespace FarmProject.Controllers
                             insertCmd.Parameters.AddWithValue("@Price", product.Price ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@CategoryId", product.CategoryId ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@UomId", product.UomId ?? (object)DBNull.Value);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", product.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", product.AddedBy);
                             insertCmd.Parameters.AddWithValue("@AddedDate", product.AddedDate);
                             insertCmd.Parameters.AddWithValue("@AddedPc", product.AddedPc);
@@ -118,7 +119,7 @@ namespace FarmProject.Controllers
                     int count = (int)checkCmd.ExecuteScalar();
                     if (count == 0)
                     {
-                        return NotFound(new { message = $"Product  not found" });
+                        return NotFound(new { message = $"Product not found" });
                     }
                     using (SqlCommand deleteCmd = new SqlCommand("DELETE FROM Products WHERE ProductId = @ProductId", con))
                     {
@@ -134,5 +135,50 @@ namespace FarmProject.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetProduct()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand getCompanyCmd = new SqlCommand("GetProductDetails", connection);
+
+                    connection.Open();
+                    SqlDataReader reader = getCompanyCmd.ExecuteReader();
+                    List<ProductGet> products= new List<ProductGet>();
+                    while (reader.Read())
+                    {
+                        ProductGet product = new ProductGet
+                        {
+                            ProductId = Convert.ToInt32(reader["ProductId"]),
+                            CategoryName = reader["CategoryName"].ToString(),
+                             ProductName= reader["ProductName"].ToString(),
+                            ProductDescription = reader["ProductDescription"].ToString(),
+                            Price = Convert.ToInt32(reader["Price"]),
+                            UomName = reader["UomName"].ToString(),
+
+                            Status = reader["Status"] != DBNull.Value ? Convert.ToBoolean(reader["Status"]) : false
+                        };
+                        products.Add(product);
+                    }
+
+                    connection.Close();
+
+                    if (products.Count > 0)
+                    {
+                        return Ok(products);
+                    }
+                    else
+                    {
+                        return NotFound(new { message = "No Companies found" });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing the request", error = ex.Message });
+            }
+        }
     }
 }

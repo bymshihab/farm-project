@@ -39,20 +39,20 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Customers (CustomerName, CustomerPhoneNumber, CustomerEmail, CustomerAddress, CustomerStatus, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@CustomerName, @CustomerPhoneNumber, @CustomerEmail, @CustomerAddress, @CustomerStatus, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Customers (CustomerName, CustomerPhoneNumber, CustomerEmail, CustomerAddress, CustomerStatus,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@CustomerName, @CustomerPhoneNumber, @CustomerEmail, @CustomerAddress, @CustomerStatus,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@CustomerName", customer.CustomerName);
                             insertCmd.Parameters.AddWithValue("@CustomerPhoneNumber", customer.CustomerPhoneNumber ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@CustomerEmail", customer.CustomerEmail ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@CustomerAddress", customer.CustomerAddress ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@CustomerStatus", customer.CustomerStatus);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", customer.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", customer.AddedBy);
                             insertCmd.Parameters.AddWithValue("@AddedDate", customer.AddedDate);
                             insertCmd.Parameters.AddWithValue("@AddedPc", customer.AddedPc);
                             insertCmd.Parameters.AddWithValue("@UpdatedBy", customer.UpdatedBy);
                             insertCmd.Parameters.AddWithValue("@UpdatedDate", customer.UpdatedDate);
                             insertCmd.Parameters.AddWithValue("@UpdatedPc", customer.UpDatedPc);
-
                             insertCmd.ExecuteNonQuery();
                         }
                         con.Close();

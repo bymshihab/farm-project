@@ -12,6 +12,7 @@ namespace FarmProject.Models
         public double? Price { get; set; }
         public int? CategoryId { get; set; }
         public int? UomId { get; set; }
+        public int? CompanyId { get; set; }
         public string? AddedBy { get; set; } = "appUser";
         public DateTime? AddedDate { get; set; } = DateTime.Now;
         public string? AddedPc { get; set; } = "Default App User";

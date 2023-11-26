@@ -6,6 +6,7 @@
         public string UomName { get; set; }
         public string? UomDescription { get; set; }
         public Boolean Status { get; set; } = true;
+        public int? CompanyId { get; set; }
         public string AddedBy { get; set; } = "appUser";
         public DateTime AddedDate { get; set; } = DateTime.Now;
         public string AddedPc { get; set; } = "Default App User";

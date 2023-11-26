@@ -38,12 +38,13 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Outsiders (OutsiderName, OutsiderCatagory, OutsiderAddress, phoneNumber, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpDatedPc) VALUES (@OutsiderName, @OutsiderCatagory, @OutsiderAddress, @phoneNumber, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpDatedPc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Outsiders (OutsiderName, OutsiderCatagory, OutsiderAddress, phoneNumber,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpDatedPc) VALUES (@OutsiderName, @OutsiderCatagory, @OutsiderAddress, @phoneNumber,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpDatedPc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@OutsiderName", outsider.OutsiderName);
                             insertCmd.Parameters.AddWithValue("@OutsiderCatagory", outsider.OutsiderCatagory ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@OutsiderAddress", outsider.OutsiderAddress ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@phoneNumber", outsider.PhoneNumber ?? (object)DBNull.Value);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", outsider.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", outsider.AddedBy);
                             insertCmd.Parameters.AddWithValue("@AddedDate", outsider.AddedDate ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@AddedPc", outsider.AddedPc);

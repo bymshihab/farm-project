@@ -7,11 +7,12 @@ namespace FarmProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ActiveCompanyController : ControllerBase
+    public class ActiveGETMilksController : ControllerBase
     {
+
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        public ActiveCompanyController(IConfiguration configuration)
+        public ActiveGETMilksController(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
@@ -22,9 +23,8 @@ namespace FarmProject.Controllers
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                using (SqlCommand command = new SqlCommand("GetActiveCompany", connection))
+                using (SqlCommand command = new SqlCommand("GETMilks", connection))
                 {
-   
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
 

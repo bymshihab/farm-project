@@ -7,24 +7,24 @@ namespace FarmProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ActiveCompanyController : ControllerBase
+    public class ActiveUomsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        public ActiveCompanyController(IConfiguration configuration)
+        public ActiveUomsController(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
 
         [HttpGet]
-        public IActionResult GetActiveCompany()
+        public IActionResult GetActiveCompany(int CompanyId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                using (SqlCommand command = new SqlCommand("GetActiveCompany", connection))
+                using (SqlCommand command = new SqlCommand("GetActiveUoms", connection))
                 {
-   
+                    command.Parameters.AddWithValue("@CompanyId", CompanyId);
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
 

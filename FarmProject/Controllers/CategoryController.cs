@@ -37,11 +37,12 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Categories (CategoryName, CategoryDescription, CategoryStatus, AddedBy, DateAdded, AddedPc, UpdateBy, DateUpdatedBy, UpdatePc) VALUES (@CategoryName, @CategoryDescription, @CategoryStatus, @AddedBy, @DateAdded, @AddedPc, @UpdateBy, @DateUpdatedBy, @UpdatePc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Categories (CategoryName, CategoryDescription, CategoryStatus,CompanyId, AddedBy, DateAdded, AddedPc, UpdateBy, DateUpdatedBy, UpdatePc) VALUES (@CategoryName, @CategoryDescription, @CategoryStatus,@CompanyId, @AddedBy, @DateAdded, @AddedPc, @UpdateBy, @DateUpdatedBy, @UpdatePc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@CategoryName", category.CategoryName);
                             insertCmd.Parameters.AddWithValue("@CategoryDescription", category.CategoryDescription ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@CategoryStatus", category.CategoryStatus);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", category.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", category.AddedBy);
                             insertCmd.Parameters.AddWithValue("@DateAdded", category.DateAdded);
                             insertCmd.Parameters.AddWithValue("@AddedPc", category.AddedPc);

@@ -39,13 +39,14 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Suppliers (SupplierName, PhoneNo, Email, Address, Status, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@SupplierName, @PhoneNo, @Email, @Address, @Status, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Suppliers (SupplierName, PhoneNo, Email, Address, Status,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@SupplierName, @PhoneNo, @Email, @Address, @Status,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@SupplierName", suppliers.SupplierName);
                             insertCmd.Parameters.AddWithValue("@PhoneNo", suppliers.PhoneNo ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@Email", suppliers.Email ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@Address", suppliers.Address ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@Status", suppliers.Status);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", suppliers.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", suppliers.AddedBy);
                             insertCmd.Parameters.AddWithValue("@AddedDate", suppliers.AddedDate);
                             insertCmd.Parameters.AddWithValue("@AddedPc", suppliers.AddedPc);

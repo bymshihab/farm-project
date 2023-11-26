@@ -10,6 +10,7 @@ namespace FarmProject.Models
         public string ShedDescription { get; set; }
         public bool Status { get; set; }
         public int ShedTypeId { get; set; }
+        public int? CompanyId { get; set; }
         public string? AddedBy { get; set; } = "appUser";
         public DateTime? AddedDate { get; set; } = DateTime.Now;
         public string? AddedPc { get; set; } = "Default App User";

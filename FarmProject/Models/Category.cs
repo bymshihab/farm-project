@@ -6,6 +6,7 @@
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         public bool CategoryStatus { get; set; } = true;
+        public int? CompanyId { get; set; }
         public string AddedBy { get; set; } = "appUser";
         public DateTime DateAdded { get; set; } = DateTime.Now;
         public string AddedPc { get; set; } = "appUser";

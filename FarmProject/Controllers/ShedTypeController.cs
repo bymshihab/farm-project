@@ -1,6 +1,7 @@
 ﻿using FarmProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -37,11 +38,12 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO ShedTypes (shedTypeName, ShedTypeDescription, Status, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@shedTypeName, @ShedTypeDescription, @Status, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO ShedTypes (shedTypeName, ShedTypeDescription, Status,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@shedTypeName, @ShedTypeDescription, @Status,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@shedTypeName", shedType.shedTypeName);
                             insertCmd.Parameters.AddWithValue("@ShedTypeDescription", shedType.ShedTypeDescription ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@Status", shedType.Status);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", shedType.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", shedType.AddedBy);
                             insertCmd.Parameters.AddWithValue("@AddedDate", shedType.AddedDate);
                             insertCmd.Parameters.AddWithValue("@AddedPc", shedType.AddedPc);
@@ -171,14 +173,14 @@ namespace FarmProject.Controllers
             }
         }
         [HttpGet("getShedTypeName")]
-        public IActionResult getShedTypeName()
+        public IActionResult getShedTypeName(int CompanyId)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    SqlCommand getShedTypeNameCmd = new SqlCommand("SELECT ShedTypeId, shedTypeName FROM ShedTypes Where Status=1", connection);
-
+                    SqlCommand getShedTypeNameCmd = new SqlCommand("SELECT ShedTypeId, shedTypeName FROM ShedTypes Where Status=1 And CompanyId=@CompanyId", connection);
+                    getShedTypeNameCmd.Parameters.AddWithValue("@CompanyId", CompanyId);
                     connection.Open();
                     SqlDataReader reader = getShedTypeNameCmd.ExecuteReader();
                     List<ShedType> shedTypes = new List<ShedType>();
@@ -210,4 +212,4 @@ namespace FarmProject.Controllers
             }
         }
     }
-  }
+}

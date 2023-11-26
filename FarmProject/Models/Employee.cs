@@ -22,6 +22,7 @@ namespace FarmProject.Models
         public bool Status { get; set; } = true;
         public string? EmployeeImage { get; set; }
         public IFormFile? ImageFile { get; set; }
+        public int? CompanyId { get; set; }
         public string? AddedBy { get; set; } = "appUser";
         public DateTime? AddedDate { get; set; } = DateTime.Now;
         public string? AddedPc { get; set; } = "Default AppUser";

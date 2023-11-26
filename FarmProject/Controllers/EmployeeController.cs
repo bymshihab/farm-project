@@ -52,7 +52,7 @@ namespace FarmProject.Controllers
 
                     employee.EmployeeCode = systemCode.Split('%')[1];
 
-                    using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Employees (EmployeeCode, FirstName, LastName, MiddleName, Salary, DOB, HireDate, PhoneNumber, Email, NID, Description, JobTitle, Status, EmployeeImage, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@EmployeeCode, @FirstName, @LastName, @MiddleName, @Salary, @DOB, @HireDate, @PhoneNumber, @Email, @NID, @Description, @JobTitle, @Status, @EmployeeImage, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
+                    using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Employees (EmployeeCode, FirstName, LastName, MiddleName, Salary, DOB, HireDate, PhoneNumber, Email, NID, Description, JobTitle, Status, EmployeeImage,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@EmployeeCode, @FirstName, @LastName, @MiddleName, @Salary, @DOB, @HireDate, @PhoneNumber, @Email, @NID, @Description, @JobTitle, @Status, @EmployeeImage,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
                     {
                         insertCmd.Parameters.AddWithValue("@EmployeeCode", employee.EmployeeCode);
                         insertCmd.Parameters.AddWithValue("@FirstName", employee.FirstName ?? (object)DBNull.Value);
@@ -69,6 +69,7 @@ namespace FarmProject.Controllers
                         insertCmd.Parameters.AddWithValue("@Status", employee.Status);
                         object logoValue = (object)imageFileName ?? DBNull.Value;
                         insertCmd.Parameters.AddWithValue("@EmployeeImage", logoValue);
+                        insertCmd.Parameters.AddWithValue("@CompanyId", employee.CompanyId);
                         insertCmd.Parameters.AddWithValue("@AddedBy", employee.AddedBy ?? (object)DBNull.Value);
                         insertCmd.Parameters.AddWithValue("@AddedDate", employee.AddedDate != null ? (object)employee.AddedDate : DBNull.Value);
                         insertCmd.Parameters.AddWithValue("@AddedPc", employee.AddedPc ?? (object)DBNull.Value);

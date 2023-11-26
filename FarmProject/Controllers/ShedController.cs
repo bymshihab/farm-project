@@ -37,12 +37,13 @@ namespace FarmProject.Controllers
                     }
                     else
                     {
-                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Sheds (ShedName, ShedDescription, Status, ShedTypeId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@ShedName, @ShedDescription, @Status, @ShedTypeId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
+                        using (SqlCommand insertCmd = new SqlCommand("INSERT INTO Sheds (ShedName, ShedDescription, Status, ShedTypeId,CompanyId, AddedBy, AddedDate, AddedPc, UpdatedBy, UpdatedDate, UpdatedPc) VALUES (@ShedName, @ShedDescription, @Status, @ShedTypeId,@CompanyId, @AddedBy, @AddedDate, @AddedPc, @UpdatedBy, @UpdatedDate, @UpdatedPc)", con))
                         {
                             insertCmd.Parameters.AddWithValue("@ShedName", shed.ShedName);
                             insertCmd.Parameters.AddWithValue("@ShedDescription", shed.ShedDescription ?? (object)DBNull.Value);
                             insertCmd.Parameters.AddWithValue("@Status", shed.Status);
                             insertCmd.Parameters.AddWithValue("@ShedTypeId", shed.ShedTypeId);
+                            insertCmd.Parameters.AddWithValue("@CompanyId", shed.CompanyId);
                             insertCmd.Parameters.AddWithValue("@AddedBy", shed.AddedBy);
                             insertCmd.Parameters.AddWithValue("@AddedDate", shed.AddedDate);
                             insertCmd.Parameters.AddWithValue("@AddedPc", shed.AddedPc);

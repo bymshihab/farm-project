@@ -168,23 +168,17 @@ namespace FarmProject.Controllers
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
                     connection.Open();
-
-                    // Retrieve the image file name before deleting the company record
                     string imageFileName = GetImageFileName(connection, CompanyId);
 
-                    // Delete the company record
                     SqlCommand deleteCommand = new SqlCommand("spDeleteCompany", connection);
                     deleteCommand.CommandType = CommandType.StoredProcedure;
                     deleteCommand.Parameters.AddWithValue("@CompanyId", CompanyId);
                     int rowsAffected = deleteCommand.ExecuteNonQuery();
 
-                    // Close the connection
                     connection.Close();
 
-                    // Check if the company record was deleted successfully
                     if (rowsAffected > 0)
                     {
-                        // Delete the associated image file if it exists
                         if (!string.IsNullOrEmpty(imageFileName))
                         {
                             DeleteImageFile(imageFileName);
@@ -204,7 +198,6 @@ namespace FarmProject.Controllers
             }
         }
 
-        // Helper method to retrieve the image file name
         private string GetImageFileName(SqlConnection connection, int companyId)
         {
             string query = "SELECT Logo FROM Companys WHERE CompanyId = @CompanyId";

@@ -10,6 +10,7 @@ namespace FarmProject.Models
         public string? Email { get; set; }
         public string? Address { get; set; }
         public Boolean Status { get; set; } = false;
+        public int? CompanyId { get; set; }
         public string? AddedBy { get; set; } = "appUser";
         public DateTime? AddedDate { get; set; } = DateTime.Now;
         public string? AddedPc { get; set; } = "Default App User";
