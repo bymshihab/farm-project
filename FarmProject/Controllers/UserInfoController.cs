@@ -177,7 +177,7 @@ namespace FarmProject.Controllers
         public IActionResult LoginUser([FromForm] UserLogIn user)
 
         {
-
+            bool a = false;
             string encryptedPassword = EncryptPassword(user.Password);
             SqlCommand cmd = new SqlCommand("SELECT * FROM UserInfo WHERE UserCode = @UserCode AND password = @password AND CompanyId = @CompanyId", con);
 
@@ -190,15 +190,20 @@ namespace FarmProject.Controllers
             if (reader.Read())
             {
                 string encryptedUserCode = reader["UserCode"].ToString();
+                a=true;
 
                 con.Close();
-                return Ok(new { message = "Login successful", encryptedUserCode });
+                return Ok(new { message = "Login successful", encryptedUserCode , a, user.CompanyId} );
             }
             else
             {
                 con.Close();
                 return BadRequest(new { message = "Invalid User Name or password" });
             }
+
+
+
+
         }
 
 

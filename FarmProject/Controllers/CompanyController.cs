@@ -47,7 +47,7 @@ namespace FarmProject.Controllers
                             await company.ImageFile.CopyToAsync(stream);
                         }
                     }
-
+                    
                     // SQL query for insertion
                     string insertQuery = @"
                         INSERT INTO Companys (CompanyId, CompanyName, VATRegNo, TINNo, TradeLicenseNo, Address, PhoneNo, Email, Logo, IsMaster, IsActive, AddedBy, DateAdded, AddedPC, UpdatedBy, DateUpdated, UpdatedPC)
